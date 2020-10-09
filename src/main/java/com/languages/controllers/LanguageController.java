@@ -1,3 +1,4 @@
+
 package com.languages.controllers;
 
 import javax.validation.Valid;
@@ -42,14 +43,14 @@ public class LanguageController {
 	@GetMapping("/edit/language/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("singleLang", langserv.getOne(id));
-		return "language.jsp";
+		return "edit.jsp";
 	}
 
 	@PostMapping("/edit/update/{id}")
 	public String updateLang(@PathVariable("id") Long id, @Valid @ModelAttribute("singleLang") LanguageClass singleLang,
 			BindingResult result) {
 		if (result.hasErrors()) {
-			return "language.jsp";
+			return "edit.jsp";
 		} else {
 			langserv.update(singleLang, id);
 			return "redirect:/";
@@ -63,7 +64,7 @@ public class LanguageController {
 		return "redirect:/";
 	}
 
-	@GetMapping("language/show/{id}")
+	@GetMapping("/language/show/{id}")
 	public String show(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("language", langserv.getOne(id));
 		return "show.jsp";
